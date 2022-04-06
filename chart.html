@@ -1,0 +1,133 @@
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+</head>
+
+<body>
+    <div class="hoge">
+        <canvas id="myRaderChart"></canvas>
+    </div>
+    <style>
+        .hoge {
+            width: 700px;
+        }
+    </style>
+    <form enctype="multipart/form-data">
+        <div id="tableData">
+            <p>自立<input type="number" class="form-control" id="HP" placeholder="" value="1"></p>
+            <p>要支援1:<input type="number" class="form-control" id="kougeki" placeholder="" value="1"></p>
+            <p>要支援2:<input type="number" class="form-control" id="bougyo" placeholder="" value="1"> </p>
+            <p>要介護1:<input type="number" class="form-control" id="tokukou" placeholder="" value="1"></p>
+            <p>要介護2:<input type="number" class="form-control" id="tokubou" placeholder="" value="1"> </p>
+            <p>要介護3:<input type="number" class="form-control" id="subayasa" placeholder="" value="1"></p>
+            <p>要介護4:<input type="number" class="form-control" id="yk4" placeholder="" value="1"></p>
+            <p>要介護5:<input type="number" class="form-control" id="yk5" placeholder="" value="1"></p>
+        </div>
+        <input type="button" onclick="plotRadar()" value="グラフを作成">
+    </form>
+    <p><button type="button" id="btn-dl">保存</button></p>
+
+    <!-- CDN -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
+    <script>
+        window.onload = () => {
+            const canvas = document.querySelector("#myRaderChart");
+            const ctx = canvas.getContext("2d");
+
+
+            // DLボタンをクリック
+            document.querySelector("#btn-dl").addEventListener("click", () => {
+                canvasDownload("#myRaderChart");
+            });
+        };
+
+
+        function plotRadar() {
+            var HP = document.getElementById('HP');
+            var kougeki = document.getElementById('kougeki');
+            var bougyo = document.getElementById('bougyo');
+            var tokukou = document.getElementById('tokukou');
+            var tokubou = document.getElementById('tokubou');
+            var subayasa = document.getElementById('subayasa');
+
+            var ctx = document.getElementById("myRaderChart");
+
+            var myRadarChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        label: '介護度割合',
+                        data: [HP.value, kougeki.value, bougyo.value, tokukou.value, tokubou.value, subayasa.value, yk4.value, yk5.value],
+                        backgroundColor: [
+                            'rgb(255,203,163)',
+                            'rgb(255,245,122)',
+                            'rgb(126,234,127)',
+                            'rgb(255,140,135)',
+                            'rgb(143,212,249)',
+                            'rgb(255,164,237)',
+                            'rgb(177,80,250)',
+                            'rgb(232,163,45)'
+                        ],
+                        borderColor: 'white',
+                        borderWidth: 1,
+                        pointBackgroundColor: 'RGB(165,42,42)'
+                    }]
+                }
+            });
+        };
+
+
+        /**
+         * Canvasを画像としてダウンロード
+         *
+         * @param {string} id          対象とするcanvasのid
+         * @param {string} [type]      画像フォーマット
+         * @param {string} [filename]  DL時のデフォルトファイル名
+         * @return {void}
+         */
+        function canvasDownload(id, type = "image/png", filename = "canvas") {
+            const blob = getBlobFromCanvas(id, type); // canvasをBlobデータとして取得
+            const dataURI = window.URL.createObjectURL(blob); // Blobデータを「URI」に変換
+
+            // JS内部でクリックイベントを発動→ダウンロード
+            const event = document.createEvent("MouseEvents");
+            event.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            const a = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
+            a.href = dataURI; // URI化した画像
+            a.download = filename; // デフォルトのファイル名
+            a.dispatchEvent(event); // イベント発動
+        }
+
+        /**
+         * 現状のCanvasを画像データとして返却
+         *
+         * @param {string}  id     対象とするcanvasのid
+         * @param {string}  [type] MimeType
+         * @return {blob}
+         */
+        function getBlobFromCanvas(id, type = "image/png") {
+            const canvas = document.querySelector(id);
+            const base64 = canvas.toDataURL(type); // "data:image/png;base64,iVBORw0k～"
+            const tmp = base64.split(","); // ["data:image/png;base64,", "iVBORw0k～"]
+            const data = atob(tmp[1]); // 右側のデータ部分(iVBORw0k～)をデコード
+            const mime = tmp[0].split(":")[1].split(";")[0]; // 画像形式(image/png)を取り出す
+
+            // Blobのコンストラクタに食わせる値を作成
+            let buff = new Uint8Array(data.length);
+            for (let i = 0; i < data.length; i++) {
+                buff[i] = data.charCodeAt(i);
+            }
+
+            return (
+                new Blob([buff], {
+                    type: mime
+                })
+            );
+        }
+    </script>
+
+</body>
