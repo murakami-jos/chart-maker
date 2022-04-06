@@ -2,32 +2,38 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 </head>
 
 <body>
-    <div class="hoge">
-        <canvas id="myRaderChart"></canvas>
-    </div>
-    <style>
-        .hoge {
-            width: 700px;
-        }
-    </style>
-    <form enctype="multipart/form-data">
-        <div id="tableData">
-            <p>自立<input type="number" class="form-control" id="HP" placeholder="" value="1"></p>
-            <p>要支援1:<input type="number" class="form-control" id="kougeki" placeholder="" value="1"></p>
-            <p>要支援2:<input type="number" class="form-control" id="bougyo" placeholder="" value="1"> </p>
-            <p>要介護1:<input type="number" class="form-control" id="tokukou" placeholder="" value="1"></p>
-            <p>要介護2:<input type="number" class="form-control" id="tokubou" placeholder="" value="1"> </p>
-            <p>要介護3:<input type="number" class="form-control" id="subayasa" placeholder="" value="1"></p>
-            <p>要介護4:<input type="number" class="form-control" id="yk4" placeholder="" value="1"></p>
-            <p>要介護5:<input type="number" class="form-control" id="yk5" placeholder="" value="1"></p>
+    <h1>円グラフメーカー</h1>
+    <main>
+        <div class="hoge">
+            <canvas id="myRaderChart"></canvas>
         </div>
-        <input type="button" onclick="plotRadar()" value="グラフを作成">
-    </form>
-    <p><button type="button" id="btn-dl">保存</button></p>
+        <div>
+            <form enctype="multipart/form-data">
+                <div id="tableData">
+                    <p>自立<input type="number" class="form-control" id="HP" placeholder="" value="0"></p>
+                    <p>要支援1<input type="number" class="form-control" id="kougeki" placeholder="" value="0"></p>
+                    <p>要支援2<input type="number" class="form-control" id="bougyo" placeholder="" value="0"></p>
+                    <p>要介護1<input type="number" class="form-control" id="tokukou" placeholder="" value="0"></p>
+                    <p>要介護2<input type="number" class="form-control" id="tokubou" placeholder="" value="0"></p>
+                    <p>要介護3<input type="number" class="form-control" id="subayasa" placeholder="" value="0"></p>
+                    <p>要介護4<input type="number" class="form-control" id="yk4" placeholder="" value="0"></p>
+                    <p>要介護5<input type="number" class="form-control" id="yk5" placeholder="" value="0"></p>
+                </div>
+                <div class="neko-wrap-d">
+                    <div class="neko-box-c">
+                        <input class="neko-box-c hoge2" type="button" onclick="plotRadar()" value="グラフを作成">
+                    </div>
+                </div>
+
+            </form>
+            <div class="neko-wrap-d"><button class="neko-box-d" type="button" id="btn-dl">保存</button>
+            </div>
+    </main>
 
     <!-- CDN -->
 
@@ -37,7 +43,6 @@
         window.onload = () => {
             const canvas = document.querySelector("#myRaderChart");
             const ctx = canvas.getContext("2d");
-
 
             // DLボタンをクリック
             document.querySelector("#btn-dl").addEventListener("click", () => {

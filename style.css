@@ -1,0 +1,139 @@
+    body {
+        background-color: #454545;
+    }
+    
+    main {
+        display: flex;
+    }
+    
+    .hoge {
+        width: 700px;
+    }
+    
+    h1 {
+        color: #ddd;
+        text-align: center;
+    }
+    
+    p {
+        margin: 0;
+        color: #ddd;
+        font-size: 20px;
+        text-align: right;
+        margin-right: 20vw;
+    }
+    
+    input {
+        width: 50px;
+    }
+    
+    .form-control {
+        background-color: #eee;
+    }
+    
+    #tableData {
+        /* display: flex; */
+        width: 50vw;
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        display: block;
+        text-decoration: none;
+        height: 35px;
+        width: 120px;
+        line-height: 37px;
+        text-align: center;
+        color: #fff;
+        background: #2bb6c1;
+        -webkit-transition: 0.3s;
+        -moz-transition: 0.3s;
+        -o-transition: 0.3s;
+        -ms-transition: 0.3s;
+        transition: 0.3s;
+    }
+    
+    .btn:hover {
+        background: #fff;
+        color: #2bb6c1;
+        border: solid 1px #2bb6c1;
+    }
+    /* ねこBOX D*/
+    
+    .neko-box-c,
+    .neko-box-d {
+        display: block;
+        position: relative;
+        margin: 30px auto 40px auto;
+        /* padding: 20px 30px; */
+        width: 250px;
+        height: 40px;
+        /* ボックス幅 */
+        background: #fdf5e6;
+        /* ボックス背景色 */
+        color: #333333;
+        /* 文字色 */
+        font-weight: bold;
+        /* テキスト太字（不要なら行を削除） */
+        text-align: center;
+        /* テキスト中央（不要なら行を削除） */
+        border: 3px solid #F3983B;
+        /* ボックス枠線(太さ・線種・色) */
+        border-radius: 50px;
+        box-shadow: 1px 1px 3px #acacac;
+        /* ボックス影（不要なら行を削除） */
+        box-sizing: border-box;
+        z-index: auto;
+    }
+    
+    .neko-box-c::before,
+    .neko-box-c::after,
+    .neko-box-d::before,
+    .neko-box-d::after {
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        content: '';
+        top: -15px;
+        z-index: -9;
+    }
+    
+    .neko-box-c::before,
+    .neko-box-d::before {
+        left: 20%;
+        background: #555555;
+        /* 左耳背景色 */
+        border: 3px solid #F3983B;
+        /* 左耳枠線(太さ・線種・色) */
+        border-radius: 10px 50px 100px 50px;
+        transform: rotate( 45deg);
+        box-shadow: 1px -1px 3px #acacac;
+        /* 耳の影（不要なら行を削除） */
+    }
+    
+    .neko-box-c::after,
+    .neko-box-d::after {
+        right: 20%;
+        background: #B8824D;
+        /* 右耳背景色 */
+        border: 3px solid #F3983B;
+        /* 右耳枠線(太さ・線種・色) */
+        border-radius: 50px 10px 50px 100px;
+        transform: rotate( -45deg);
+        box-shadow: 1px 1px 3px #acacac;
+        /* 耳の影（不要なら行を削除） */
+    }
+    
+    .neko-wrap-d {
+        background-color: transparent;
+        position: relative;
+        z-index: 0;
+    }
+    
+    .hoge2 {
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        height: 34px;
+        width: 244px;
+    }
